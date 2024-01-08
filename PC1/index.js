@@ -55,7 +55,7 @@ API y procesarlos con async/await.
 */
 
 // Función asincrónica para obtener un arreglo de objetos con nombre, especie y genero
-async function obtenerDatosDePersonajes() {
+const obtenerDatosDePersonajes = async ()=>{
   try {
     const respuesta = await fetch('https://rickandmortyapi.com/api/character');
     
