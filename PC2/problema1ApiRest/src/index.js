@@ -6,9 +6,9 @@ const cors=require("cors")
 const userRouter= require('./routes/user')
 const port = process.env.PORT||3100
 //midleware
+app.use(cors())
 app.use(express.json())
 app.use('/api',userRouter)
-app.use(cors())
 
 app.get('/',(req,res)=>{
   res.send("Bienvenido a mi apirest")
