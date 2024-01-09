@@ -63,7 +63,7 @@ function App() {
 
   const actualizarUsuario = async () => {
     if (editingUser !== null) {
-      
+
       console.log(editingUser)
       const endpoint = `http://localhost:3200/api/user/${editingUser}`;
       const dataToUpdate = {
@@ -84,7 +84,7 @@ function App() {
           throw new Error('Error al actualizar usuario');
         }
 
-        leerDatos(); 
+        leerDatos();
         console.log('Usuario Actualizado');
       } catch (error) {
         console.error('Error:', error.message);
@@ -95,6 +95,46 @@ function App() {
         age: '',
         email: ''
       });
+    }
+  };
+
+  const eliminar = async (id) => {
+    const endpoint = `http://localhost:3200/api/user/${id}`;
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al eliminar usuario');
+      }
+
+      leerDatos();
+      console.log('Usuario Eliminado');
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  };
+
+
+  const ver = async (id) => {
+    const endpoint = `http://localhost:3200/api/user/${id}`;
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'GET',
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al leer usuario');
+      }
+      const userData = await response.json();
+
+      alert(`ID: ${userData._id}\nNombre: ${userData.name}\nEdad: ${userData.age}\nEmail: ${userData.email}`);
+
+    } catch (error) {
+      console.error('Error:', error.message);
     }
   };
 
@@ -119,7 +159,6 @@ function App() {
         <button type="submit">Agregar</button>
       </form>
 
-      {/* Tabla para mostrar usuarios */}
       {users.length === 0 ? (
         <div>Cargando...</div>
       ) : (
@@ -140,16 +179,14 @@ function App() {
                 <td>{elemento.email}</td>
                 <td>
                   <button onClick={() => editar(index)}>Editar</button>
-                  <button>Eliminar</button>
-                  <button>Ver</button>
+                  <button onClick={() => eliminar(elemento._id)}>Eliminar</button>
+                  <button onClick={() => ver(elemento._id)}>Ver</button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       )}
-
-      {/* Formulario para editar */}
       {editingUser !== null && (
         <div>
           <h2>Editar Usuario</h2>
