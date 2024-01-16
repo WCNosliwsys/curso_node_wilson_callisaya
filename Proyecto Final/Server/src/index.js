@@ -3,7 +3,7 @@ const app= express();
 const mongoose = require('mongoose')
 require("dotenv").config()
 const cors=require("cors")
-const userRouter= require('./routes/user')
+const userRouter= require('./routes/user_router')
 const port = process.env.PORT||3100
 //midleware
 app.use(cors())
