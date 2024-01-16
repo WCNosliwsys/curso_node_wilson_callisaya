@@ -1,0 +1,35 @@
+<form id="resetPasswordForm" style="max-width: 300px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
+  <label for="newPassword" style="display: block; margin-bottom: 8px;">Nueva Contraseña:</label>
+  <input type="password" id="newPassword" name="password" required style="width: 100%; padding: 8px; margin-bottom: 16px; box-sizing: border-box;">
+  <br>
+  <input type="button" value="Restablecer Contraseña" onclick="submitForm()" style="background-color: #4caf50; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer;">
+</form>
+
+<script>
+function submitForm() {
+  const newPassword = document.getElementById('newPassword').value;
+
+  const formData = { password: newPassword };
+
+  fetch('${process.env.SERVER_URL}/auth/resetPassword/${req.params.token}', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+    if(data.ok=="ok"){
+      alert('Contraseña actualizada correctamente')
+    }else{
+      alert(data.mensaje)
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert(error.mensaje)
+  });
+}
+</script>

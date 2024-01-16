@@ -3,17 +3,8 @@ const router = express.Router();
 const authenticationToken = require('../middleware/jwt')
 
 const userController = require("../controllers/user_controller");
-const authController = require("../controllers/auth_controller")
 
-router.post("/solicitudResetPass",authController.solicitudResetPass)
 
-router.post('/resetPassword/:token', authController.resetPasswordToken)
-
-router.get("/protected",authenticationToken, authController.checkProtected)
-
-router.post('/register', authController.register)
-
-router.post('/login', authController.login)
 
 router.post("/user", userController.createUser)
 

@@ -13,7 +13,7 @@ const sendEmail = async(to,subject,text)=>{
     from:"nosliwsys@gmail.com",
     to:to,
     subject:subject,
-    text:text
+    html:text
   }
   try{
     await transporter.sendMail(mailOption)
