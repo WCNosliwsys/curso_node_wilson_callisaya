@@ -6,14 +6,14 @@ const userController = require("../controllers/user_controller");
 
 
 
-router.post("/user", userController.createUser)
+router.post("/user",authenticationToken, userController.createUser)
 
-router.get("/users", userController.getAllUser)
+router.get("/users",authenticationToken, userController.getAllUser)
 
-router.get("/user/:id", userController.getUserById)
+router.get("/user/:id",authenticationToken, userController.getUserById)
 
-router.put("/user/:id", userController.updateUser)
+router.put("/user/:id",authenticationToken, userController.updateUser)
 
-router.delete("/user/:id", userController.deleteUser)
+router.delete("/user/:id",authenticationToken, userController.deleteUser)
 
 module.exports = router;

@@ -24,7 +24,8 @@ const authController = {
       const isValidatedPassword = await bcrypt.compare(req.body.password, user.password)
 
       if (!user || !isValidatedPassword) {
-        throw new Error("Credenciales invalidas")
+        // throw new Error("Credenciales invalidas")
+        return  res.status(401).json({ message: "Credenciales invalidas","ok":"fail" })
       }
       console.log("credenciales correctas")
       const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
