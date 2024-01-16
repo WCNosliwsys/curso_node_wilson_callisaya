@@ -1,0 +1,20 @@
+# Dependencias de Node.js
+node_modules/
+
+# Archivo de configuración local
+#.env
+
+# Carpeta generada durante la construcción del proyecto
+dist/
+
+# Logs
+logs/
+*.log
+
+# Dependencias para la plataforma
+npm-debug.log
+yarn-error.log
+
+# Configuración específica del usuario
+.idea/
+.vscode/
