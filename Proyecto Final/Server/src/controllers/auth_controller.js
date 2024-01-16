@@ -12,7 +12,7 @@ const authController = {
     try {
       const newUser = userSchema(req.body)
       await newUser.save()
-      res.status(201).send("Usuario registrado con Exito")
+      res.status(201).json({"mensaje":"Usuario registrado con Exito","ok":"ok"})
     } catch (error) {
       res.status(400).send(error)
     }

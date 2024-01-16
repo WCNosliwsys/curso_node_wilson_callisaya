@@ -1,14 +1,39 @@
 import React, { useState } from 'react';
 import './Login.css'; // Importa el archivo de estilos
-import { NavLink } from 'react-router-dom';
+import { NavLink,useNavigate } from 'react-router-dom';
 
 export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate(); 
 
-  const handleLogin = () => {
-    // Lógica para manejar el inicio de sesión
+  const handleLogin = async () => {
+
     console.log('Ingresar - Correo:', email, 'Contraseña:', password);
+    const data = {
+      email: email,
+      password: password,
+    };
+    try {
+      const response = await fetch('http://localhost:3200/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      const verData = await response.json()
+      if (response.status == 200) {
+        console.log(verData.token)
+        navigate('/home');
+      }
+     else{
+      alert(verData.message)
+     }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+
   };
 
   return (

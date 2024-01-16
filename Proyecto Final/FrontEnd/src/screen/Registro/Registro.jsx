@@ -8,12 +8,41 @@ export const Registro = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleRegistro = () => {
+  const handleRegistro = async () => {
     // Aquí puedes utilizar los datos capturados (nombre, edad, email, password)
     // Puedes enviarlos a tu API o manejarlos de alguna otra manera
 
     // Simulando una respuesta exitosa
-    alert('Registro exitoso');
+
+    const data = {
+      name: nombre,
+      age: edad,
+      email: email,
+      password: password,
+    };
+    try {
+      const response = await fetch('http://localhost:3200/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      const verData = await response.json()
+      console.log(verData)
+      console.log(response.status)
+      console.log(response)
+/*       if (response.status == 200) {
+        console.log(verData.token)
+        // navigate('/home');
+      }
+     else{
+      alert(verData.message)
+     } */
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+
   };
 
   return (
