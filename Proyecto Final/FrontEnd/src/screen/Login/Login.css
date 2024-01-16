@@ -1,0 +1,58 @@
+/* Login.css */
+
+.login-container {
+  margin: 0 auto;
+  padding: 40px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-heading {
+  text-align: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.login-label {
+  margin-bottom: 10px;
+}
+
+.login-input {
+  display: block;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.login-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background-color: #0056b3;
+}
+
+.login-forgot-password {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.login-forgot-password a {
+  text-decoration: none;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.login-forgot-password a:hover {
+  text-decoration: underline;
+}

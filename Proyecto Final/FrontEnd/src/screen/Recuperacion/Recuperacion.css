@@ -1,0 +1,51 @@
+.recuperacion-container {
+  max-width: 300px;
+  margin: 100px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.recuperacion-container h2 {
+  text-align: center;
+}
+
+.recuperacion-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.recuperacion-container label {
+  margin-bottom: 10px;
+}
+
+.recuperacion-container input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.recuperacion-container button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.volver-link{
+  margin-top: 10px;
+  background-color: #5b4caf;
+
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  text-align: center;
+
+}
+
+.text-link{
+  color: white;
+}
