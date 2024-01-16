@@ -1,9 +1,12 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
+  const [token, setToken] = useState(localStorage.getItem('token') || '');
   const [users, setUsers] = useState([]);
   const [editingUser, setEditingUser] = useState(null);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     age: '',
@@ -11,7 +14,12 @@ export const Home = () => {
   });
 
   function leerDatos() {
-    fetch("http://localhost:3200/api/users")
+    fetch("http://localhost:3200/api/users", {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    })
       .then(res => res.json())
       .then(data => setUsers(data))
       .catch(e => console.log(e))
@@ -23,17 +31,19 @@ export const Home = () => {
 
   const agregar = async (e) => {
     e.preventDefault();
-    const { nombre, edad, email } = e.target.elements;
+    const { nombre, edad, email,password } = e.target.elements;
     const data = {
       name: nombre.value,
       age: parseInt(edad.value),
       email: email.value,
+      password:password.value
     };
 
     try {
       const response = await fetch('http://localhost:3200/api/user', {
         method: 'POST',
         headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
@@ -44,6 +54,7 @@ export const Home = () => {
       }
       leerDatos();
       console.log('Usuario Agregado');
+      alert("Usuario Agregado")
     } catch (error) {
       console.error('Error:', error.message);
     }
@@ -73,6 +84,7 @@ export const Home = () => {
         const response = await fetch(endpoint, {
           method: 'PUT',
           headers: {
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(dataToUpdate),
@@ -102,6 +114,10 @@ export const Home = () => {
     try {
       const response = await fetch(endpoint, {
         method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
       });
 
       if (!response.ok) {
@@ -122,6 +138,10 @@ export const Home = () => {
     try {
       const response = await fetch(endpoint, {
         method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
       });
 
       if (!response.ok) {
@@ -153,8 +173,13 @@ export const Home = () => {
           <label htmlFor="">Email:</label>
           <input type="email" name='email' />
         </div>
+        <div>
+          <label htmlFor="">Contraseña:</label>
+          <input type="password" name='password' />
+        </div>
 
         <button type="submit">Agregar</button>
+        <button type="button" onClick={()=> navigate('/')}>Cerrar Sesion</button>
       </form>
 
       {users.length === 0 ? (

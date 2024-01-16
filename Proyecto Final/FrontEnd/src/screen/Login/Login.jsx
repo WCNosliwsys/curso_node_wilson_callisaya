@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Login.css'; // Importa el archivo de estilos
 import { NavLink,useNavigate } from 'react-router-dom';
 
 export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  
+  useEffect(()=>{
+    localStorage.setItem('token', "");
+
+  },[])
 
   const handleLogin = async () => {
 
@@ -24,6 +29,7 @@ export const Login = () => {
       });
       const verData = await response.json()
       if (response.status == 200) {
+        localStorage.setItem('token', verData.token);
         console.log(verData.token)
         navigate('/home');
       }

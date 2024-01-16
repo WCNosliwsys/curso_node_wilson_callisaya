@@ -32,13 +32,8 @@ export const Registro = () => {
       console.log(verData)
       console.log(response.status)
       console.log(response)
-/*       if (response.status == 200) {
-        console.log(verData.token)
-        // navigate('/home');
-      }
-     else{
-      alert(verData.message)
-     } */
+      alert("Usuario registrado exitosamente")
+      navigate('/home');
     } catch (error) {
       console.error('Error:', error.message);
     }
